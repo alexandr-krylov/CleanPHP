@@ -1,7 +1,11 @@
 <?php
 namespace CleanPhp\Invoicer\Domain\Repository;
-interface OrderRepositoryInterface
-extends RepositoryInterface
+interface OrderRepositoryInterface extends RepositoryInterface
 {
-    public function getUninvoicedOrders();
+    /**
+     * Get all orders without any invoices.
+     * 
+     * @return array
+     */
+    public function getUninvoicedOrders(): array;
 }
