@@ -29,6 +29,18 @@ return array(
                         'action' => 'index',
                     ],
                 ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'create' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/new',
+                            'defaults' => [
+                                'action' => 'new',
+                            ],
+                        ]
+                    ],
+                ]
             ],
             'orders' => [
                 'type' => 'Segment',
