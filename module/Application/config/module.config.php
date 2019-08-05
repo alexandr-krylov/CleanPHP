@@ -105,6 +105,13 @@ return array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController'
         ),
+        'factories' => [
+            'Application\Controller\Customers' => function ($sm) {
+                return new \Application\Controller\CustomersController(
+                    $sm->getServiceLocator()->get('CustomerTable')
+                );
+            },
+        ],
     ),
     'view_manager' => array(
         'display_not_found_reason' => true,
