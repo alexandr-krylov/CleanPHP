@@ -2,3 +2,5 @@
 .env
 /storage/*
 composer.lock
+/nbproject/private/
+/nbproject

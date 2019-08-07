@@ -7,6 +7,9 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
+use CleanPhp\Invoicer\Service\InputFilter\CustomerInputFilter;
+use Zend\Stdlib\Hydrator\ClassMethods;
+
 return array(
     'router' => array(
         'routes' => array(
@@ -120,7 +123,9 @@ return array(
         'factories' => [
             'Application\Controller\Customers' => function ($sm) {
                 return new \Application\Controller\CustomersController(
-                    $sm->getServiceLocator()->get('CustomerTable')
+                    $sm->getServiceLocator()->get('CustomerTable'),
+                    new CustomerInputFilter(),
+                    new ClassMethods()
                 );
             },
         ],

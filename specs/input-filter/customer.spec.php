@@ -8,56 +8,55 @@ describe('InputFilter\Customer', function () {
 
     describe('->isValid()', function () {
         it('should require a name', function () {
+            $this->inputFilter->setData(['name' => '']);
             $isValid = $this->inputFilter->isValid();
 
             $error = [
                 'isEmpty' => 'Value is required and can\'t be empty'
             ];
 
-            $messages = $this->inputFilter->getMessages()['name'];
+            $messages = $this->inputFilter->getMessages()['name'];// ?? $error;
 
             expect($isValid)->to->equal(false);
             expect($messages)->to->equal($error);
         });
 
         it('should require an email', function () {
+            $this->inputFilter->setData(['email' => '']);
             $isValid = $this->inputFilter->isValid();
             $error = [
-            'isEmpty' => 'Value is required and can\'t be empty'
+                'isEmpty' => 'Value is required and can\'t be empty'
             ];
-            $messages = $this->inputFilter
-            ->getMessages()['email'];
+            $messages = $this->inputFilter->getMessages()['email'];// ?? $error;
             expect($isValid)->to->equal(false);
             expect($messages)->to->equal($error);
-            });
-            it('should require a valid email', function () {
+        });
+        it('should require a valid email', function () {
             $scenarios = [
-            [
-            'value' => 'bob',
-            'errors' => []
-            ],
-            [
-            'value' => 'bob@bob',
-            'errors' => []
-            ],
-            [
-            'value' => 'bob@bob.com',
-            'errors' => null
-            ]Our Application in Zend Framework 2
+                [
+                    'value' => 'bob',
+                    'errors' => []
+                ],
+                [
+                    'value' => 'bob@bob',
+                    'errors' => []
+                ],
+                [
+                    'value' => 'bob@bob.com',
+                    'errors' => null
+                ]
             ];
             foreach ($scenarios as $scenario) {
-            $this->inputFilter->setData([
-            'email' => $scenario['value']
-            ])->isValid();
-            $messages = $this->inputFilter
-            ->getMessages()['email'];
-            if (is_array($messages)) {
-            expect($messages)->to->be->a('array');
-            expect($messages)->to->not->be->empty();
-            } else {
-            expect($messages)->to->be->null();
+                $this->inputFilter->setData(['email' => $scenario['value']])
+                        ->isValid();
+                $messages = $this->inputFilter->getMessages()['email'] ?? null;
+                if (is_array($messages)) {
+                    expect($messages)->to->be->a('array');
+                    expect($messages)->to->not->be->empty();
+                } else {
+                    expect($messages)->to->be->null();
+                }
             }
-            }
-            });
+        });
     });
 });
