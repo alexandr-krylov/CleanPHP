@@ -118,7 +118,8 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => 'Application\Controller\IndexController'
+            'Application\Controller\Index' =>
+            'Application\Controller\IndexController'
         ),
         'factories' => [
             'Application\Controller\Customers' => function ($sm) {
@@ -146,6 +147,11 @@ return array(
             __DIR__ . '/../view',
         ),
     ),
+    'view_helpers' => [
+        'invokables' => [
+            'validationErrors' => 'Application\View\Helper\ValidationErrors',
+        ]
+    ],
     // Placeholder for console routes
     'console' => array(
         'router' => array(
