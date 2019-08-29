@@ -32,9 +32,8 @@ class ValidationErrors extends AbstractHelper
         }
         
         $errors = $this->getView()->errors;
-        
         if (isset($errors[$element])) {
-            return $errors[element];
+            return $errors[$element];
         }
         
         return false;
