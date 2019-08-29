@@ -6,7 +6,7 @@ use CleanPhp\Invoicer\Domain\Repository\OrderRepositoryInterface;
 class OrderTable extends AbstractDataTable
 implements OrderRepositoryInterface
 {
-    public function getUninvoicedOrders()
+    public function getUninvoicedOrders() : array
     {
         return [];
     }
