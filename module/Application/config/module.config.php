@@ -63,7 +63,7 @@ return array(
             'orders' => [
                 'type' => 'Segment',
                 'options' => [
-                    'route' => '/orders',
+                    'route' => '/orders[/:action[/:id]]',
                     'defaults' => [
                         'controller' => 'Application\Controller\Orders',
                         'action' => 'index',
