@@ -13,17 +13,33 @@ namespace Application\Controller;
  *
  * @author alexandr
  */
-
+use CleanPhp\Invoicer\Domain\Entity\Order;
+use CleanPhp\Invoicer\Domain\Repository\CustomerRepositoryInterface;
 use CleanPhp\Invoicer\Domain\Repository\OrderRepositoryInterface;
+use CleanPhp\Invoicer\Persistence\Hydrator\OrderHydrator;
+use CleanPhp\Invoicer\Service\InputFilter\OrderInputFilter;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
+
 
 class OrdersController extends AbstractActionController
 {
     protected $orderRepository;
-    
-    public function __construct(OrderRepositoryInterface $orders)
+    protected $customerRepository;
+    protected $inputFilter;
+    protected $hydrator;
+
+    public function __construct(
+            OrderRepositoryInterface $orders,
+            CustomerRepositoryInterface $customers,
+            OrderInputFilter $inputFilter,
+            OrderHydrator $hydrator
+            )
     {
         $this->orderRepository = $orders;
+        $this->customerRepository = $customers;
+        $this->inputFilter = $inputFilter;
+        $this->hydrator = $hydrator;
     }
     
     public function indexAction()
@@ -44,4 +60,24 @@ class OrdersController extends AbstractActionController
         
         return ['order' => $order];
     }
+    
+    public function newAction() {
+        $viewModel = new ViewModel();
+        $order = new Order();
+        
+        if ($this->getRequest()->isPost()) {
+            $this->inputFilter->setData($this->params()->fromPost());
+            if ($this->inputFilter->isValid()) {
+                $order = $this->hydrator->hydrate(
+                        $this->inputFilter->getValues(), $order
+                        );
+            }
+        }
+        $viewModel->setVariable(
+                'customers', $this->customerRepository->getAll()
+                ); 
+        $viewModel->setVariable('order', $order);
+        return $viewModel;
+    }
+    
 }

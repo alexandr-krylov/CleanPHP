@@ -8,6 +8,7 @@ describe('InputFilter\Customer', function () {
 
     describe('->isValid()', function () {
         it('should require a name', function () {
+//            var_dump($this->inputFilter);
             $this->inputFilter->setData(['name' => '']);
             $isValid = $this->inputFilter->isValid();
 

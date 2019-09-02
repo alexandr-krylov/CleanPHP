@@ -14,6 +14,7 @@ describe('InputFilter\Order', function(){
     
     describe('->isValid()', function (){
         it('should require a customer.id', function () {
+            $this->inputFilter->setData(['id' => '']);
             $isValid = $this->inputFilter->isValid();
             $error = [
                 'id' => [
@@ -23,6 +24,18 @@ describe('InputFilter\Order', function(){
             $customer = $this->inputFilter->getMessages()['customer'];
             expect($isValid)->to->equal(false);
             expect($customer)->to->equal($error);
+        });
+        it('should require an order number', function () {
+//            var_dump($this->inputFilter);
+            $this->inputFilter->setData(['orderNumber' => '']);
+            $isValid = $this->inputFilter->isValid();
+            $error = [
+                    'isEmpty' => 'Value is required and can\'t be empty'
+                ];
+            $orderNo = $this->inputFilter
+                ->getMessages()['orderNumber'];
+            expect($isValid)->to->equal(false);
+            expect($orderNo)->to->equal($error);
         });
         it('should require order numbers be 13 chars long', function () {
             $scenarios = [
@@ -49,13 +62,16 @@ describe('InputFilter\Order', function(){
                 $this->inputFilter = new OrderInputFilter();
                 $this->inputFilter->setData([
                     'orderNumber' => $scenario['value']
-                ])->isValid();
+                ]);
+                $isValid = $this->inputFilter->isValid();
+//                var_dump($this->inputFilter->getMessages());
                 $messages = $this->inputFilter
-                    ->getMessages()['orderNumber'];
+                    ->getMessages()['orderNumber'] ?? null;
                 expect($messages)->to->equal($scenario['errors']);
             }
         });
         it('should require a description', function () {
+            $this->inputFilter->setData(['description' => '']);
             $isValid = $this->inputFilter->isValid();
             $error = ['isEmpty' => 'Value is required and can\'t be empty'];
             $messages = $this->inputFilter->getMessages()['description'];
@@ -63,6 +79,7 @@ describe('InputFilter\Order', function(){
             expect($messages)->to->equal($error);
         });
         it('should require a total', function () {
+            $this->inputFilter->setData(['total' => '']);
             $isValid = $this->inputFilter->isValid();
             $error = ['isEmpty' => 'Value is required and can\'t be empty'];
             $messages = $this->inputFilter->getMessages()['total'];
@@ -91,7 +108,7 @@ describe('InputFilter\Order', function(){
                 $this->inputFilter
                         ->setData(['total' => $scenario['value']])
                         ->isValid();
-                $messages = $this->inputFilter->getMessages()['total'];
+                $messages = $this->inputFilter->getMessages()['total'] ?? null;
                 expect($messages)->to->equal($scenario['errors']);
             }
         });
