@@ -71,6 +71,18 @@ class OrdersController extends AbstractActionController
                 $order = $this->hydrator->hydrate(
                         $this->inputFilter->getValues(), $order
                         );
+                $this->orderRepository->begin()
+                        ->persist($order)
+                        ->commit();
+                $this->flashMessenger()->addSuccessMessage('Order Created');
+                $this->redirect()->toUrl('/orders/view/' . $order->getId());
+            } else {
+                $this->hydrator->hydrate($this->params()->fromPost(), $order);
+                $viewModel
+                        ->setVariable(
+                                'errors',
+                                $this->inputFilter->getMessages()
+                                );
             }
         }
         $viewModel->setVariable(

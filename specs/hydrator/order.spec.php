@@ -46,5 +46,29 @@ describe('Persistence\Hydrator\OrderHydrator', function(){
             expect($order->getCustomer())->to->equal($customer);
             $this->getProphet()->checkPredictions();
         });
+        
+        it('should hydrate the embedded customer data', function () {
+            $data = ['customer' => ['id' => 20]];
+            $order = new Order();
+            $this->hydrator->hydrate($data, $order);
+            assert(
+                    $data['customer']['id'] === $order->getCustomer()->getId(),
+                    'id does not match'
+                    );
+        });
+    });
+    
+    describe('Persistence\Hydrator\OrderHydrator', function () {
+        describe('->extract()', function (){
+            it('should extract the customer object', function (){
+                $order = new Order();
+                $order->setCustomer((new Customer())->setId(14));
+                $data = $this->hydrator->extract($order);
+                assert(
+                        $order->getCustomer()->getId() === $data['customer_id'],
+                        'customer_id is not correct'
+                        );
+            });
+        });
     });
 });

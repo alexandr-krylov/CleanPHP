@@ -2,6 +2,7 @@
 namespace Application\View\Helper;
 
 use Zend\View\Helper\AbstractHelper;
+use Vnn\Keyper\Keyper;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -31,11 +32,8 @@ class ValidationErrors extends AbstractHelper
             return false;
         }
         
-        $errors = $this->getView()->errors;
-        if (isset($errors[$element])) {
-            return $errors[$element];
-        }
+        $errors = Keyper::create($this->getView()->errors);
         
-        return false;
+        return $errors->get($element) ?: false;
     }
 }

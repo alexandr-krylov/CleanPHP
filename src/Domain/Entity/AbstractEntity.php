@@ -31,7 +31,7 @@ abstract class AbstractEntity
      * 
      * @return int
      */
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
@@ -45,7 +45,7 @@ abstract class AbstractEntity
      * 
      * @return $this
      */
-    public function setId(int $id)
+    public function setId($id)
     {
         $this->id = $id;
         return $this;
