@@ -39,9 +39,15 @@ return [
                     $hydrator
                 );
             },
+            'InvoiceHydrator' => function ($sm) {
+                return new InvoiceHydrator(
+                    new ClassMethods(),
+                    $sm->get('OrderTable')
+                );
+            },
             'InvoiceTable' => function($sm) {
                 $factory = new TableGatewayFactory();
-                $hydrator = new ClassMethods();
+                $hydrator = $sm->get('InvoiceHydrator');
                 return new InvoiceTable(
                     $factory->createGateway(
                         $sm->get('Zend\Db\Adapter\Adapter'),

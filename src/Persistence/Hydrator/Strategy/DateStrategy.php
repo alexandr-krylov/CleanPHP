@@ -22,6 +22,14 @@ class DateStrategy extends DefaultStrategy
         if (is_string($value)) {
             $value = new DateTime($value);
         }
-        return ;
+        return $value;
+    }
+    
+    public function extract($value)
+    {
+        if ($value instanceof DateTime) {
+            $value = $value->format('Y-m-d');
+        }
+        return $value;
     }
 }
