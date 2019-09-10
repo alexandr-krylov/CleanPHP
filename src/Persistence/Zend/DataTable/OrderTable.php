@@ -6,8 +6,10 @@ use CleanPhp\Invoicer\Domain\Repository\OrderRepositoryInterface;
 class OrderTable extends AbstractDataTable
 implements OrderRepositoryInterface
 {
-    public function getUninvoicedOrders() : array
+    public function getUninvoicedOrders()
     {
-        return [];
+        return $this->gateway->select(
+                'id NOT IN(SELECT order_id FROM invoices)'
+                );
     }
 }

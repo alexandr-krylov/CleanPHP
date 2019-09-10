@@ -11,7 +11,6 @@ namespace CleanPhp\Invoicer\Persistence\Hydrator;
 use CleanPhp\Invoicer\Domain\Entity\Order;
 use CleanPhp\Invoicer\Domain\Repository\OrderRepositoryInterface;
 use CleanPhp\Invoicer\Persistence\Hydrator\Strategy\DateStrategy;
-use Zend\Stdlib\Hydrator\ClassMethods;
 use Zend\Stdlib\Hydrator\HydratorInterface;
 
 /**

@@ -7,5 +7,5 @@ interface OrderRepositoryInterface extends RepositoryInterface
      * 
      * @return array
      */
-    public function getUninvoicedOrders() : array;
+    public function getUninvoicedOrders();
 }

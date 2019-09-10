@@ -20,6 +20,7 @@ use CleanPhp\Invoicer\Persistence\Zend\DataTable\OrderTable;
 use CleanPhp\Invoicer\Persistence\Zend\TableGateway\TableGatewayFactory;
 use Zend\Stdlib\Hydrator\ClassMethods;
 use CleanPhp\Invoicer\Persistence\Hydrator\OrderHydrator;
+use CleanPhp\Invoicer\Persistence\Hydrator\InvoiceHydrator;
 
 return [
     'service_manager' => [
