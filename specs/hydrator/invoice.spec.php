@@ -57,7 +57,7 @@ describe('Persistence\Hydrator\InvoiceHydrator', function(){
             $this->repository->getById(500)
                     ->shouldBeCalled()
                     ->willReturn($order);
-            $this->hydrator->hydrate($date, $invoice);
+            $this->hydrator->hydrate($data, $invoice);
             expect($invoice->getOrder())->to->equal($order);
             $this->getProphet()->checkPredictions();
         });

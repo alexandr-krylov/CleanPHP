@@ -24,7 +24,7 @@ class InvoicingService
         $orders = $this->orderRepository->getUninvoicedOrders();
 
         $invoices = [];
-        foreach ($orders as $order) {
+        foreach ($orders ?? [] as $order) {
             $invoices[] = $this->invoiceFactory->createFromOrder($order);
         }
 
