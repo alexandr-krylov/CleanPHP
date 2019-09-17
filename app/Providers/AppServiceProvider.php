@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use CleanPhp\Invoicer\Domain\Repository\CustomerRepositoryInterface;
+use CleanPhp\Invoicer\Persistence\Doctrine\Repository\CustomerRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +25,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(
+                CustomerRepositoryInterface::class,
+                function($app){
+                    return new CustomerRepository(
+                            $app['Doctrine\ORM\EntityManagerInterface']
+                            );
+        });
     }
 }
