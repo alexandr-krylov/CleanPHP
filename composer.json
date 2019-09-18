@@ -13,7 +13,13 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
-        "mrkrstphr/laravel-indoctrinated": "dev-master"
+        "mrkrstphr/laravel-indoctrinated": "dev-master",
+        "zendframework/zend-inputfilter": "^2.10",
+        "zendframework/zend-servicemanager": "^3.4",
+        "zendframework/zend-i18n": "^2.9",
+        "zendframework/zend-stdlib": "^3.2",
+        "zendframework/zend-hydrator": "^3.0",
+        "vnn/keyper": "^1.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
