@@ -2,7 +2,8 @@
 namespace CleanPhp\Invoicer\Persistence\Hydrator;
 
 use CleanPhp\Invoicer\Domain\Repository\CustomerRepositoryInterface;
-use Zend\Stdlib\Hydrator\HydratorInterface;
+//use Zend\Stdlib\Hydrator\HydratorInterface;
+use Zend\Hydrator\HydratorInterface;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -28,7 +29,7 @@ class OrderHydrator implements HydratorInterface
         $this->customerRepository = $customerRepository;
     }
     
-    public function extract($object)
+    public function extract($object): array
     {
         $data = $this->wrappedHydrator->extract($object);
         

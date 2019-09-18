@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use CleanPhp\Invoicer\Domain\Repository\CustomerRepositoryInterface;
+use CleanPhp\Invoicer\Domain\Repository\OrderRepositoryInterface;
+use CleanPhp\Invoicer\Persistence\Doctrine\Repository\OrderRepository;
 use CleanPhp\Invoicer\Persistence\Doctrine\Repository\CustomerRepository;
 use Illuminate\Support\ServiceProvider;
 use Zend\Hydrator\ClassMethodsHydrator;
@@ -38,5 +40,13 @@ class AppServiceProvider extends ServiceProvider
                             $app['Doctrine\ORM\EntityManagerInterface']
                             );
         });
+        
+        $this->app->bind(
+                OrderRepositoryInterface::class,
+                function ($app) {
+                    return new OrderRepository(
+                            $app['Doctrine\ORM\EntityManagerInterface']
+                            );
+                });
     }
 }
