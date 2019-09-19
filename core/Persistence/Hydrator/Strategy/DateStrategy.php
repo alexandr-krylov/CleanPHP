@@ -3,7 +3,7 @@
 namespace CleanPhp\Invoicer\Persistence\Hydrator\Strategy;
 
 use DateTime;
-use Zend\Stdlib\Hydrator\Strategy\DefaultStrategy;
+use Zend\Hydrator\Strategy\DefaultStrategy;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -17,7 +17,7 @@ use Zend\Stdlib\Hydrator\Strategy\DefaultStrategy;
  */
 class DateStrategy extends DefaultStrategy
 {
-    public function hydrate($value)
+    public function hydrate($value, ?array $data = NULL)
     {
         if (is_string($value)) {
             $value = new DateTime($value);
@@ -25,7 +25,7 @@ class DateStrategy extends DefaultStrategy
         return $value;
     }
     
-    public function extract($value)
+    public function extract($value, ?object $object = null)
     {
         if ($value instanceof DateTime) {
             $value = $value->format('Y-m-d');

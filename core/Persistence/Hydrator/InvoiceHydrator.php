@@ -11,7 +11,7 @@ namespace CleanPhp\Invoicer\Persistence\Hydrator;
 use CleanPhp\Invoicer\Domain\Entity\Order;
 use CleanPhp\Invoicer\Domain\Repository\OrderRepositoryInterface;
 use CleanPhp\Invoicer\Persistence\Hydrator\Strategy\DateStrategy;
-use Zend\Stdlib\Hydrator\HydratorInterface;
+use Zend\Hydrator\HydratorInterface;
 
 /**
  * Description of InvoiceHydrator
@@ -33,7 +33,7 @@ class InvoiceHydrator implements HydratorInterface
         $this->orderRepository = $orderRepository;
     }
     
-    public function extract($object)
+    public function extract($object): array
     {
         $data = $this->wrappedHydrator->extract($object);
         if (array_key_exists('order', $data) && !empty($data['order'])) {

@@ -2,7 +2,7 @@
 use CleanPhp\Invoicer\Domain\Entity\Customer;
 use CleanPhp\Invoicer\Domain\Entity\Order;
 use CleanPhp\Invoicer\Persistence\Hydrator\OrderHydrator;
-use Zend\Stdlib\Hydrator\ClassMethods;
+use Zend\Hydrator\ClassMethodsHydrator as ClassMethods;
 
 describe('Persistence\Hydrator\OrderHydrator', function(){
     beforeEach(function(){

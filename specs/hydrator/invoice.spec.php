@@ -1,7 +1,7 @@
 <?php
 use CleanPhp\Invoicer\Domain\Entity\Invoice;
 use CleanPhp\Invoicer\Persistence\Hydrator\InvoiceHydrator;
-use Zend\Stdlib\Hydrator\ClassMethods;
+use Zend\Hydrator\ClassMethodsHydrator;
 use CleanPhp\Invoicer\Domain\Entity\Order;
 
 describe('Persistence\Hydrator\InvoiceHydrator', function(){
@@ -10,7 +10,7 @@ describe('Persistence\Hydrator\InvoiceHydrator', function(){
                 'CleanPhp\Invoicer\Domain\Repository\OrderRepositoryInterface'
                 );
         $this->hydrator = new InvoiceHydrator(
-                new ClassMethods(), $this->repository->reveal()
+                new ClassMethodsHydrator(), $this->repository->reveal()
                 );
     });
     describe('->extract()', function (){
